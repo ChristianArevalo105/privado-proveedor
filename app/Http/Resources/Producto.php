@@ -3,6 +3,8 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\Precio as PrecioResource;
+use App\Http\Resources\Categoria as CategoriaResource;
 
 class Producto extends JsonResource
 {
@@ -21,6 +23,7 @@ class Producto extends JsonResource
             'foto'=> $this->foto,
             'foto_url'=> $this->foto_url,
             'precios' => PrecioResource::collection($this->precios),
+            'categoria' => new CategoriaResource($this->categoria),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

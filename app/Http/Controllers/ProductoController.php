@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Producto;
 use Illuminate\Http\Request;
+use Validator;
+use App\Http\Resources\Producto as ProductoResource;
+use App\Http\Resources\Categoria as CategoriaResource;
 
-class ProductoController extends Controller
+class ProductoController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +17,9 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        //
+        $producto = Producto::all();
+    
+        return $this->sendResponse(ProductoResource::collection($producto), 'Produtos retrieved successfully.');
     }
 
     /**
@@ -36,7 +41,12 @@ class ProductoController extends Controller
      */
     public function show($id)
     {
-        //
+        $producto = Producto::find($id);
+        if (is_null($producto)) {
+            return $this->sendError('Producto not found.');
+        }
+   
+        return $this->sendResponse(new ProductoResource($producto), 'Producto retrieved successfully.');
     }
 
     /**

@@ -14,12 +14,6 @@ class Precio extends JsonResource
      */
     public function toArray($request)
     {
-        return [
-            'id' => $this->id,
-            'nombre' => $this->nombre,
-            'costo' => $this->costo,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-        ];
+        return parent::toArray($request);
     }
 }
